@@ -6,13 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import dev.epegasus.fingerprintauthentication.databinding.ActivityMainBinding
 
 @Suppress("SameParameterValue")
 class MainActivity : AppCompatActivity() {
 
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         authenticateUser(BiometricManager.Authenticators.BIOMETRIC_WEAK)
         //authenticateUser(BiometricManager.Authenticators.BIOMETRIC_STRONG)
@@ -73,6 +76,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showToast(message: String) {
+        binding.tvTextMain.text = message
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
